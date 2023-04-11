@@ -202,7 +202,8 @@ state.inpute = x
 atate = x
                                                                       
 former mutates state, latter assigns new state
-
+it checks if old object == new object
+when u mutate the old object it's still the same object
                                                                       
                                                                      ....................................................................................................................................................................
                                                                       
