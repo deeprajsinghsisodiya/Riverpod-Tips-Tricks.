@@ -53,4 +53,4 @@ build(context, ref) {
   );
 }
 
-Tip Yea. Whole point is to avoid stream builder and the like. Just use a regular Provider at that point! 
+Tip Yea. Whole point is to avoid stream builder and the like. Just use a regular Provider at that point!  
