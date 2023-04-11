@@ -54,3 +54,156 @@ build(context, ref) {
 }
 
 Tip Yea. Whole point is to avoid stream builder and the like. Just use a regular Provider at that point!  
+  
+....................................................................................................................................................................
+ 
+  Tip : use this to check for errors.
+  
+  
+  try {
+  
+  await ref.read(appLocaleProvider.notifier).future;
+  
+} catch (_) {}
+  
+  use this to check for errors.
+  
+  ....................................................................................................................................................................
+  
+  
+ Tip: Filtering rebuilds is unrelated to when. If you want to filter rebuilds, that's about select
+
+  
+  ....................................................................................................................................................................
+  
+Tip:  FutureProvider doesn't have the new hot-reload capability though. You've got to jump to the new generated Future-returning classes for that. 
+  
+  ....................................................................................................................................................................
+  
+  How to override StateNotifierProvider with a provider of mocked notifier using overrideWith instead of overrideWithProvider?
+  
+  return the mocked notifier in the callback
+final mock = MockedNotifier();
+
+ProviderScope(overrides: [provider.overrideWith((ref) => mock)])
+  
+  
+....................................................................................................................................................................  
+ 
+  I have a AsyncNotifier at the moment. Which return list of Favourites, when i add and delete favourite they are async operations. But checking if something is already a favourite then it's not a future anymore
+  bool isFavourite(int id) {
+    state.whenData((value) {
+      for (final favourite in value) {
+        if (favourite.id == id) {
+          return true;
+        }
+      }
+    });
+
+    return false;
+  }
+  
+  
+   writing the equivalent of your loop
+actually, even simpler:  state.value.contains(id)
+  
+    bool isFavourite(Favourite fav) {
+    return state.value?.contains(fav) ?? false;
+  }
+  
+  ....................................................................................................................................................................
+  
+  
+  When writing your own StateNotifier subclasses, it's quite common to use try/catch blocks to deal with Futures that can fail:In such cases, AsyncValue.guard is a convenient alternative that does all the heavy-lifting for us:
+  
+  
+  
+....................................................................................................................................................................  
+  
+  Notify depedents that this provider has changed.
+
+This is typically used for mutable state, such as to do:
+
+class TodoList extends Notifier<List<Todo>> {
+  @override
+  List<Todo>> build() => [];
+
+  void addTodo(Todo todo) {
+    state.add(todo);
+    ref.notifyListeners();
+  }
+}
+  https://codewithandrea.com/tips/async-value-guard-try-catch/
+  
+.................................................................................................................................................................... 
+  
+late ProviderSubscripton<ScanService> scanSub;
+  
+initState(){
+  ...
+  scanSub = ref.listenManual(scanServiceProvider, (prev, next) {});
+  scanSub.read().startScan();
+}
+
+dispose() {
+  scanSub.read().stopScan();
+}
+  
+  
+.................................................................................................................................................................... 
+  
+  
+  https://pub.dev/documentation/riverpod/latest/riverpod/Ref/exists.html
+  
+  ....................................................................................................................................................................
+  
+  I am having a problem with ref.listen,is not being called...
+ref.listen(actionariRows, (previous, next) {//MAIN WIDGET
+      debugPrint(previous.toString());
+      debugPrint(next.toString());
+    });
+ 
+this is in build
+And in another file I update it :
+void stergeActionarRow(String idActionar) {//CONTROLLER FILE
+    debugPrint('delete actionar row');
+    for (var i = 0; i < ref.read(actionariRows.notifier).state.length; ++i) {
+      if (ref.read(actionariRows.notifier).state[i].cells['id']!.value ==
+          idActionar) {
+        //ref.read(actionariRows.notifier).state.removeAt(i);
+        ref.read(actionariRows.notifier).update((state) {
+          state.removeAt(i);
+          return state;
+        });
+        debugPrint(ref.read(actionariRows).toString());
+        return;
+      }
+    }
+  }
+ 
+The print in the function is being called but not in the build
+It works only if it updates in the build function
+                                                                      
+Don't mutate the list. Clone it instead
+update((state) => [...state]..removeAt(i))
+      
+      
+   ....................................................................................................................................................................
+      
+      
+ if you have a method on a notifier that is NOT updating state, you are doing it wrong.
+      
+      
+ ....................................................................................................................................................................     
+      
+      there's a difference between 
+state.inpute = x
+ and 
+atate = x
+                                                                      
+former mutates state, latter assigns new state
+
+                                                                      
+                                                                     ....................................................................................................................................................................
+                                                                      
+                                                                     
