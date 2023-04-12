@@ -413,3 +413,19 @@ so I don't think you're quite getting this yet.
 changing "state" is also what notifies your listeners
 
 ....................................................................................................................................................................
+
+Q why providers should create in global , What if I create providers in class
+ 
+Tip: its necessary that they be global, because they arent actually storing the data. the data is stored inside of the ProviderContainer created for you by ProviderScope.
+the provider tells riverpod how to create the data
+much like how when you create a StatelessWidget, you arent acting on the widget itself, you actually use the BuildContext (which was the created Element. Riverpod uses Elements of its own)
+
+....................................................................................................................................................................
+
+
+AsyncNotifier is a FutureProvider with methods for modifying it
+Use it like a FutureProvider
+If you don't need the UI to modify your provider, use a FutureProvider
+If you do, use an AsyncNotifier
+
+....................................................................................................................................................................
