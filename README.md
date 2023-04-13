@@ -429,3 +429,9 @@ If you don't need the UI to modify your provider, use a FutureProvider
 If you do, use an AsyncNotifier
 
 ....................................................................................................................................................................
+  
+  
+Yeah, that's what I was thinking.  The primary purpose of overrides is for testing, and for emulating "region of tree" locality for providers, as I understand it.
+  
+...................................................................................................................................................................
+
