@@ -439,3 +439,13 @@ Yeah, that's what I was thinking.  The primary purpose of overrides is for testi
 You're supposed to break down logic into small independent pieces, not create one huge monolithic object per page
   
   ...................................................................................................................................................................
+  
+  
+  Clean architecture is extremely commonly shown when looking for architecture to use with Riverpod.
+https://codewithandrea.com/articles/flutter-app-architecture-riverpod-introduction/
+https://otakoyi.software/blog/flutter-clean-architecture-with-riverpod-and-supabase
+https://flutterawesome.com/clean-architecture-in-flutter-using-riverpod/
+  
+  
+  ...................................................................................................................................................................
+  
