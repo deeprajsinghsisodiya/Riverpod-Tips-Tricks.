@@ -435,3 +435,7 @@ Yeah, that's what I was thinking.  The primary purpose of overrides is for testi
   
 ...................................................................................................................................................................
 
+  what riverpod wants you to do.
+You're supposed to break down logic into small independent pieces, not create one huge monolithic object per page
+  
+  ...................................................................................................................................................................
