@@ -449,3 +449,20 @@ https://flutterawesome.com/clean-architecture-in-flutter-using-riverpod/
   
   ...................................................................................................................................................................
   
+  
+  do you want your async provider to update when its dependencies change, but also have a local mutable value that may be only temporary?
+the idiom for that is:
+void updateSomehow({int arg, String arg2}) {
+  state = AsyncLoading();
+  state = await AsyncValue.guard(() => someFunctionReturningFutureMaybe(arg, arg2));
+}
+that handles all the loading/error/data merges and exception throwing and future dealings, etc.
+I think I've got that right.  that should be in the docs somewhere but it keeps ending up here too.
+  
+...................................................................................................................................................................
+  
+  Q. Should use AsyncLoading().copyWithPrevious(state) to keep the previous state
+  
+Tip:  that's automatic
+any assignment to state is a copy-with-previous, as I recall.
+Remi has blessed this sequence of code.
