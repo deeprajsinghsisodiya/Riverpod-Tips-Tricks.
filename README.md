@@ -466,3 +466,5 @@ I think I've got that right.  that should be in the docs somewhere but it keeps 
 Tip:  that's automatic
 any assignment to state is a copy-with-previous, as I recall.
 Remi has blessed this sequence of code.
+
+...................................................................................................................................................................
