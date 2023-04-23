@@ -562,7 +562,66 @@ You can either use AsyncValue.unwrapPrevious() or the farious flags of when or e
   
   ...................................................................................................................................................................
 
+Describe the bug
 
+When FutureProvider/AsyncNotifier rebuilds because of Ref.watch/Ref.Refresh and resulting in AsyncError, It loses its previous data (value will be null).
+
+This will break the intended behavior of skipError: true
+
+To Reproduce
+
+final throwErrorModifier = StateProvider((ref) => false);
+
+final testProvider = FutureProvider.autoDispose<String>((ref) async {
+  await Future.delayed(const Duration(seconds: 5));
+  if (ref.watch(throwErrorModifier)) {
+    throw Exception();
+  }
+  return 'data';
+});
+
+class TestScreen extends ConsumerWidget {
+  const TestScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final asyncValue = ref.watch(testProvider);
+    
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Riverpod example'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            asyncValue.when(
+              skipLoadingOnReload: true,
+              skipLoadingOnRefresh: true,
+              skipError: true,
+              data: (data) => Text(data),
+              loading: () => Text('loading'),
+              error: (err, _) => Text('error'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                ref.read(throwErrorModifier.notifier).state = true;
+              },
+              child: Text('throw error'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+Expected behavior
+
+When testProvider rebuilds, it'll keep showing the prev data while loading.
+but when AsyncError triggers, it'll lose the prev data and will show error instead.
+
+Expected behavior is to keep showing prev data as skipError is set to true
 
 
 ...................................................................................................................................................................
