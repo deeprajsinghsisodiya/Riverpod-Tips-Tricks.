@@ -666,7 +666,28 @@ If there's a way to streamline this and maybe solve some common problems though;
 
 ...................................................................................................................................................................
   
-  
+  Warn against AsyncNotifier.update misuses
+  class Example extends AsyncNotifier<int> {
+ ...
+
+  void fn() {
+    state = AsyncLoading(); // KO, "update" will likely never complete
+    update((data) => ...);
+  }
+
+  void fn() {
+    update((data) {
+      state = AsyncLoading(); // OK
+       ...
+    });
+  }
+
+
+  void fn() {
+    update((unused) => ...); // the parameter should be used. Otherwise use AsyncValue.guard
+  }
+
+}
   
   ...................................................................................................................................................................
 
