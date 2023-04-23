@@ -626,11 +626,42 @@ Expected behavior is to keep showing prev data as skipError is set to true
 
 ...................................................................................................................................................................
   
-  
+  A pattern for this would be to have all the providers you'd want to be refreshed to "watch" a common provider:
+
+final myGroup = Provider<void>((ref) {});
+
+final futureProvider1= FutureProvider((ref) {
+  ref.watch(myGroup);
+  ...
+});
+final futureProvider2= FutureProvider((ref) {
+  ref.watch(myGroup);
+  ...
+});
+
+...
+
+ref.refresh(myGroup) // will refresh futureProvider1 and futureProvider2
   
   ...................................................................................................................................................................
 
+But to answer the question more specifically, for now I think a plain StreamProvider using connectivity_plus is more than enough
 
+We can do:
+
+final connectivityProvider = StreamProvider(() => /* use connectivity_plus to determine if we have internet connection */);
+
+final cachedData = FutureProvider<User>(
+  key: 'cached_data',
+  decode: User.fromJson,
+  encode: (value) => value.toJson(),
+  (ref) async {
+  final connectivity = await ref.watch(connectivityProvider.future);
+  if (is offline) return ref.future; // wait for online
+
+  return fetch('api/user');
+});
+If there's a way to streamline this and maybe solve some common problems though; I'd be happy to revisit it.
 
 
 ...................................................................................................................................................................
