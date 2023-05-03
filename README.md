@@ -1,4 +1,7 @@
 # Riverpod-Tips-Tricks.
+
+
+
 From Riverpod Discord
 
 Jan 30 2023
@@ -191,7 +194,11 @@ update((state) => [...state]..removeAt(i))
       
       
  if you have a method on a notifier that is NOT updating state, you are doing it wrong.
-      
+  
+
+
+
+    
       
  ....................................................................................................................................................................     
       
@@ -321,7 +328,7 @@ class Example extends ConsumerWidget {
   }
 }
 
-
+Ggggggh
 void main() => runApp(ProviderScope(child: MaterialApp(home: Scaffold(body: Example()))));
 
 So always fetch via ref.read directly before the task you need it 👍
