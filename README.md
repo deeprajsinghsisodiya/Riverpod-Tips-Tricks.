@@ -1,5 +1,20 @@
 # Riverpod-Tips-Tricks.
 
+Q. How can i refresh a  futureProvider.family
+ 
+This my provider:
+final getFriendStateProvider =
+    FutureProvider.family.autoDispose((ref, userId) async {
+  final data = await supabase.rpc('get_friend_status',
+      params: {'_user_id': ref.watch(uuidProvider), '_friend_id': userId});
+});
+since i am using the provider in a Listview.builder that makes it a bit more difficult
+
+Tip: You can just invalidate the whole family
+ref.invalidate(getFriendStateProvider);
+
+..........................................................................................................................................................................
+
 ![image](https://github.com/deeprajsinghsisodiya/Riverpod-Tips-Tricks./assets/122676491/921a7529-39a5-4306-819c-32ec165e7b79)
 
 
