@@ -1,5 +1,13 @@
 # Riverpod-Tips-Tricks.
 
+
+Q. I have a family future provider, and I want to listen (for a snackbar) and watch that provider, Whats the best way to do this?
+I'm looking for bloc consumer like  for riverpod
+
+Tip ref.listen(yourProvider(yourParam), (before, after) { /* your snackbar here */ });
+
+..........................................................................................................................................................................
+
 Q. How can i refresh a  futureProvider.family
  
 This my provider:
