@@ -1,5 +1,14 @@
 # Riverpod-Tips-Tricks.
 
+..........................................................................................................................................................................
+
+Generic providers are done~
+@riverpod
+List<T> example<T>(ExampleRef<T> ref) {
+  return <T>[];
+}
+ 
+..........................................................................................................................................................................
 
 Q. I have a family future provider, and I want to listen (for a snackbar) and watch that provider, Whats the best way to do this?
 I'm looking for bloc consumer like  for riverpod
