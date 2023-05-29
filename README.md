@@ -1,6 +1,10 @@
 # Riverpod-Tips-Tricks.
 
+Since ref.listen doesn't trigger at duplicated values, I need advice on how I can solve this using Riverpod to get a listener that triggers at every value, even if it's identical to the previous one.
+Maybe create a data class instead of using int and then override the equal method to always return false...
 
+Tip: Yeah, you can always override updateShouldNotify to be true.
+Or ensure that your mutate methods always call notifyListeners()
 
 ..........................................................................................................................................................................
 
