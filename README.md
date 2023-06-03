@@ -14,7 +14,7 @@ Or ensure that your mutate methods always call notifyListeners()
 
 ..........................................................................................................................................................................
 
-Generic providers are done~
+Tip: Generic providers are done~
 @riverpod
 List<T> example<T>(ExampleRef<T> ref) {
   return <T>[];
