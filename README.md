@@ -1,4 +1,10 @@
 # Riverpod-Tips-Tricks.
+
+The state of a provider isn't stored in a notifier, it's in the ref.
+That includes AsyncNotifierProvider too. AsyncNotifier.state is equivalent to get state => ref.state
+
+..........................................................................................................................................................................
+
 If you are using await inside the build of async notifier that throw uncaught exception use try&catch or .then.
 
 This might be working using try catch
