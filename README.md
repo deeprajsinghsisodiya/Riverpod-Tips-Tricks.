@@ -1,4 +1,16 @@
 # Riverpod-Tips-Tricks.
+If you are using await inside the build of async notifier that throw uncaught exception use try&catch or .then.
+
+This might be working using try catch
+
+Future<Response> get(..) async  {
+  try {
+    return await dio.get( ... );
+  }
+  catch (e, trace) {
+   return Future<Response>.error(e, trace);
+  }
+}
 
 ..........................................................................................................................................................................
 
