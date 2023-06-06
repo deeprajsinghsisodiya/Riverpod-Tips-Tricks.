@@ -1,4 +1,17 @@
 # Riverpod-Tips-Tricks.
+
+..........................................................................................................................................................................
+
+Immutability
+Riverpod generally recommends immutability. It enables better tooling and makes certain optimizations simpler.
+
+For example, provider.select assumes that the returned value is immutable. If returning a mutable object, select won't cause the object to rebuild when said object is mutated.
+
+Using mutable state on a notifier is also necessary if you want ref.listen's "previous" to work. Using mutable state, the "previous" and "next" values on change could end-up being the same if an object is mutated.
+
+Also: It's not implemented yet, but immutability would empower the upcoming state devtool too. Through immutability, it would be possible to implement what we call "time travel" during a state inspection.
+
+
 ..........................................................................................................................................................................
 <img width="397" alt="image" src="https://github.com/deeprajsinghsisodiya/Riverpod-Tips-Tricks./assets/122676491/dda2d25f-f76c-448f-8a9d-eb93cb254d48">
 
