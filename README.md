@@ -1,5 +1,24 @@
 # Riverpod-Tips-Tricks.
 
+    final specificInt = ref.watch(
+      intListProvider.select((anInt) =>
+          anInt.requireValue.singleWhere((element) => element == intId)),
+    );
+
+
+Bad state: Tried to call `requireValue` on an `AsyncValue` that has no value:
+AsyncLoading<List<int>>()
+
+
+I'm trying to write a widget test, where I require a value from a FutureProvider. I can 'guarantee' that the value will be ready when the widget is, but I can't figure out how to mock that in my test. I've created a minimal sample that I pulled those snippets from that I can include if more context is necessary
+And of course, I could just change requireValue to valueOrNull, or similar, but  where is the fun in that
+
+  
+  remirousselet 
+  overrideWith((ref) => value)
+
+..........................................................................................................................................................................
+
 The state of a provider isn't stored in a notifier, it's in the ref.
 That includes AsyncNotifierProvider too. AsyncNotifier.state is equivalent to get state => ref.state
 
