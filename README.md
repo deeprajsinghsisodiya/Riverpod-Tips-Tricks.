@@ -1,6 +1,15 @@
 # Riverpod-Tips-Tricks.
+ref.invalidate use and ref.refresh.
 
-    final specificInt = ref.watch(
+  the problem is if you call ref.refresh multiple times in one interframe cycle, you end up rebuilding it multiple times.
+with ref.invalidate, it just sets a flag
+and so it's the ref.watch on the next frame cycle that triggers the new data.
+so ref.invalidate is definitely preferred.
+That's also why there's a lint if you don't use the output of ref.refresh
+  
+............................................................................................................................................................................
+  
+  final specificInt = ref.watch(
       intListProvider.select((anInt) =>
           anInt.requireValue.singleWhere((element) => element == intId)),
     );
