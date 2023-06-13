@@ -262,7 +262,8 @@ actually, even simpler:
   
   
 ---
-Q What is Notift dependent.
+#### Q What is Notift dependent.
+
   Notify depedents that this provider has changed.
 
 This is typically used for mutable state, such as to do:
@@ -284,11 +285,12 @@ class TodoList extends Notifier<List<Todo>> {
   
 --- 
   
-#### Q How to get Provider Subscription  
+#### Q How to get Provider Subscription.
 
-Tip late ProviderSubscripton<ScanService> scanSub;
-  
+Tip 
 ```bash
+late ProviderSubscripton<ScanService> scanSub.
+ 
   
 initState(){
   scanSub = ref.listenManual(scanServiceProvider, (prev, next) {});
@@ -297,17 +299,19 @@ initState(){
 dispose() {
   scanSub.read().stopScan();
 }
-  
   ```
+  
   ---
   
   https://pub.dev/documentation/riverpod/latest/riverpod/Ref/exists.html
   
   ---
-
-  #### Q  I am having a problem with ref.listen,is not being called. ref.listen(actionariRows, (previous, next) {//MAIN WIDGET
+  
+#### Q  I am having a problem with ref.listen,is not being called. ref.listen(actionariRows, (previous, next) {//MAIN WIDGET
     
-  debugPrint(previous.toString());
+
+```bash
+debugPrint(previous.toString());
       debugPrint(next.toString());
     });
  
@@ -335,12 +339,14 @@ It works only if it updates in the build function
 Don't mutate the list. Clone it instead
 update((state) => [...state]..removeAt(i))
       
-      
-   ....................................................................................................................................................................
-      
-      
- if you have a method on a notifier that is NOT updating state, you are doing it wrong.
+```      
+ ---
+          
+ Tip if you have a method on a notifier that is NOT updating state, you are doing it wrong.
   
+ ---
+ 
+ 
 
 
 
