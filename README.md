@@ -453,7 +453,7 @@ extension DelayDisposeExtension<T> on AutoDisposeRef<T> {
 ---
 
 #### Q. Why NOt to use ref.watch on the onpressed:
-
+```bash
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -476,7 +476,7 @@ class Example extends ConsumerWidget {
 
 Ggggggh
 void main() => runApp(ProviderScope(child: MaterialApp(home: Scaffold(body: Example()))));
-
+```
 So always fetch via ref.read directly before the task you need it 👍
 For synchronous code it should be fine (also the docs refer to async code )
 But then, if the function changes to async you can maybe forget to change it
