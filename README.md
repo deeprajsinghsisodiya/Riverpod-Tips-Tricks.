@@ -763,7 +763,7 @@ final cachedData = FutureProvider<User>(
 If there's a way to streamline this and maybe solve some common problems though; I'd be happy to revisit it.
 
 
-...................................................................................................................................................................
+---
   
  #### Q Warn against AsyncNotifier.update misuses
   
