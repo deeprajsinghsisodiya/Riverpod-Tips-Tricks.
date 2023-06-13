@@ -106,7 +106,7 @@ Tip ref.listen(yourProvider(Parameter), (before, after) { /* your snackbar here 
 #### Q. How can i refresh a  futureProvider.family
  
 This my provider:
-```
+```dash
 final getFriendStateProvider =
     FutureProvider.family.autoDispose((ref, userId) async {
   final data = await supabase.rpc('get_friend_status',
