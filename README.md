@@ -1,14 +1,26 @@
 # Riverpod-Tips-Tricks.
-ref.invalidate use and ref.refresh.
 
-  the problem is if you call ref.refresh multiple times in one interframe cycle, you end up rebuilding it multiple times.
+---
+
+#### Q. don't touch state inside create or build.  just return the initial value. But what if we want to?
+
+Yeah in general you will not have to touch state inside provider's body. in rare cases you might need to, but in that case you should set some state first (and make sure that it'll not re-initialize when the build run again ~using some private bool)
+
+---
+
+#### Q How to use ref.invalidate use and ref.refresh.
+
+the problem is if you call ref.refresh multiple times in one interframe cycle, you end up rebuilding it multiple times.
 with ref.invalidate, it just sets a flag
 and so it's the ref.watch on the next frame cycle that triggers the new data.
 so ref.invalidate is definitely preferred.
 That's also why there's a lint if you don't use the output of ref.refresh
   
-............................................................................................................................................................................
-  
+---
+ 
+
+#### Q. I'm trying to write a widget test, where I require a value from a FutureProvider. I can 'guarantee' that the value will be ready when the widget is, but I can't figure out how to mock that in my test. I've created a minimal sample that I pulled those snippets from that I can include if more context is necessary And of course, I could just change requireValue to valueOrNull, or similar, but  where is the fun in that
+ ```bash
   final specificInt = ref.watch(
       intListProvider.select((anInt) =>
           anInt.requireValue.singleWhere((element) => element == intId)),
@@ -18,28 +30,21 @@ That's also why there's a lint if you don't use the output of ref.refresh
 Bad state: Tried to call `requireValue` on an `AsyncValue` that has no value:
 AsyncLoading<List<int>>()
 
-
-I'm trying to write a widget test, where I require a value from a FutureProvider. I can 'guarantee' that the value will be ready when the widget is, but I can't figure out how to mock that in my test. I've created a minimal sample that I pulled those snippets from that I can include if more context is necessary
-And of course, I could just change requireValue to valueOrNull, or similar, but  where is the fun in that
-
+```
   
-  remirousselet 
-  overrideWith((ref) => value)
-
-....................................................................................................... .......................................................................................................................................... ....................................................................................................... .............................................................................................................................................................................................................................................
-21
-
-...................................................................................................
+remirousselet 
+```overrideWith((ref) => value)```
 
 The state of a provider isn't stored in a notifier, it's in the ref.
 That includes AsyncNotifierProvider too. AsyncNotifier.state is equivalent to get state => ref.state
 
-..........................................................................................................................................................................
+---
+
+#### Q Correct way to use async notifier inside Build
 
 If you are using await inside the build of async notifier that throw uncaught exception use try&catch or .then.
-
 This might be working using try catch
-
+```bash
 Future<Response> get(..) async  {
   try {
     return await dio.get( ... );
@@ -48,8 +53,11 @@ Future<Response> get(..) async  {
    return Future<Response>.error(e, trace);
   }
 }
+```
 
-..........................................................................................................................................................................
+---
+
+#### Q Immutability and riverpod
 
 Immutability
 Riverpod generally recommends immutability. It enables better tooling and makes certain optimizations simpler.
@@ -60,21 +68,22 @@ Using mutable state on a notifier is also necessary if you want ref.listen's "pr
 
 Also: It's not implemented yet, but immutability would empower the upcoming state devtool too. Through immutability, it would be possible to implement what we call "time travel" during a state inspection.
 
+---
 
-..........................................................................................................................................................................
 <img width="397" alt="image" src="https://github.com/deeprajsinghsisodiya/Riverpod-Tips-Tricks./assets/122676491/dda2d25f-f76c-448f-8a9d-eb93cb254d48">
 
-..........................................................................................................................................................................
+---
 
-Since ref.listen doesn't trigger at duplicated values, I need advice on how I can solve this using Riverpod to get a listener that triggers at every value, even if it's identical to the previous one.
+#### Q Since ref.listen doesn't trigger at duplicated values, I need advice on how I can solve this using Riverpod to get a listener that triggers at every value, even if it's identical to the previous one.
+
 Maybe create a data class instead of using int and then override the equal method to always return false...
 
 Tip: Yeah, you can always override updateShouldNotify to be true.
 Or ensure that your mutate methods always call notifyListeners()
 
-..........................................................................................................................................................................
+---
 
-..........................................................................................................................................................................
+#### Q Generic Provider Use 
 
 Tip: Generic providers are done~
 @riverpod
@@ -82,14 +91,15 @@ List<T> example<T>(ExampleRef<T> ref) {
   return <T>[];
 }
  
-..........................................................................................................................................................................
-
-Q. I have a family future provider, and I want to listen (for a snackbar) and watch that provider, Whats the best way to do this?
+---
+  
+  
+  #### Q. I have a family future provider, and I want to listen (for a snackbar) and watch that provider, Whats the best way to do this?
 I'm looking for bloc consumer like  for riverpod
 
 Tip ref.listen(yourProvider(Parameter), (before, after) { /* your snackbar here */ });
 
-..........................................................................................................................................................................
+---
 
 Q. How can i refresh a  futureProvider.family
  
