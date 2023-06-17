@@ -2,6 +2,15 @@
 
 ---
 
+#### Q can I use ref.read inside the initState body? I want to set an initial value when the widget is created.
+
+Yes you can.ref.read will give you the momentary value
+if it was an async provider, that's wrapped in an AsyncValue
+that value might be AsyncLoading
+since initState is synchronous, that may be all you need.
+
+---
+
 #### Q. don't touch state inside create or build.  just return the initial value. But what if we want to?
 
 Yeah in general you will not have to touch state inside provider's body. in rare cases you might need to, but in that case you should set some state first (and make sure that it'll not re-initialize when the build run again ~using some private bool)
