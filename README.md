@@ -1,5 +1,7 @@
 # Riverpod-Tips-Tricks.
 
+---
+
 #### Q if you're using a provider to fetch data from a remote server, and you want it to search after the user has stopped entering input... what would the best way to handle this be?  For example. you have a textfield with an onChanged method that searches the apps local database... but you want to wait for the user to stop typing before searching the remote db for possible matches... 
 
 Yep, that's called debouncing, and an example can be found in the riverpod examples 
