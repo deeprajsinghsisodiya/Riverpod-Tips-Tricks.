@@ -386,6 +386,52 @@ when u mutate the old object it's still the same object
 
 https://pub.dev/packages/riverpod_infinite_scroll
 
+how remi does
+
+@riverpod
+Future<List<String>> example(
+  ExampleRef ref, {
+  required int page,
+}) {
+  return Future.value(
+    List.generate(50, (index) => 'Item ${page * 50 + index}'),
+  );
+}
+
+class MyWidget extends ConsumerWidget {
+  const MyWidget({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        final itemPage = index ~/ 50;
+        final itemIndexInPage = index % 50;
+
+        final items = ref.watch(exampleProvider(page: itemPage));
+        return items.when(
+          data: (items) {
+            if (itemIndexInPage >= items.length) return null;
+            return Text(items[itemIndexInPage]);
+          },
+          error: (err, _) {
+            if (itemIndexInPage == 0) {
+              return Text('error');
+            }
+            return null;
+          },
+          loading: () {
+            if (itemIndexInPage == 0) {
+              return const Placeholder();
+            }
+            return null;
+          },
+        );
+      },
+    );
+  }
+}
+
 ---
 
 
