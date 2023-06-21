@@ -3,8 +3,6 @@
 ---
 
 #### Q How can I make sure to run something after the provider has built its initial instance?
-
-Tip You don't "run after build". You refactor your build such that such that the returned value matches
 ```dart
 @riverpod
 class QrScanner extends _$QrScanner {
@@ -16,6 +14,7 @@ class QrScanner extends _$QrScanner {
 }
 ```
 
+Tip You don't "run after build". You refactor your build such that such that the returned value matches
 ```dart
 @riverpod
 class QrScanner extends _$QrScanner {
