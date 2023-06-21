@@ -2,6 +2,34 @@
 
 ---
 
+#### Q How can I make sure to run something after the provider has built its initial instance?
+
+Tip You don't "run after build". You refactor your build such that such that the returned value matches
+```dart
+@riverpod
+class QrScanner extends _$QrScanner {
+  @override
+  QrScannerState build() {
+    _startScanner(); // How to run this after the build method? Except wrapping it in a microtask?
+    return const QrScannerState();
+  }
+}
+```
+
+```dart
+@riverpod
+class QrScanner extends _$QrScanner {
+  @override
+  QrScannerState build() {
+   state = const QrScannerState();
+   _startScanner(); //
+   return state;
+  }
+}
+```
+
+---
+
 #### Q if you're using a provider to fetch data from a remote server, and you want it to search after the user has stopped entering input... what would the best way to handle this be?  For example. you have a textfield with an onChanged method that searches the apps local database... but you want to wait for the user to stop typing before searching the remote db for possible matches... 
 
 Yep, that's called debouncing, and an example can be found in the riverpod examples 
