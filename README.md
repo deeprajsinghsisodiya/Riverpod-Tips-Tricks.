@@ -2,6 +2,19 @@
 
 ---
 
+#### Q Make a provider that watch other providers and wait.
+
+```dart
+build () async {
+  final f1 = ref.watch(p1.future);
+  final f2 = ref.watch(p2.future);
+  await (f1, f2).wait;
+  return; // or whatever the return val should be
+}
+```
+
+---
+
 #### Q How can I make sure to run something after the provider has built its initial instance?
 ```dart
 @riverpod
