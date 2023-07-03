@@ -2,6 +2,12 @@
 
 ---
 
+it does. if you take a look at what I wrote, it's using the .future property, which returns a future, rather than async value, which you can await.
+
+await ref.read(currentUserFutureProvider.future); Await Provider for warm up.
+
+---
+
 #### Q Make a provider that watch other providers and wait.
 
 ```dart
