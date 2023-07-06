@@ -1,6 +1,11 @@
 # Riverpod-Tips-Tricks.
 ---
 
+#### Q There seems to be no base ref that both Ref and WidgetRef share, I am definitively sure there is an apparent reason but what is it?
+
+Both can do different stuff that the other one can't do.
+i.e you can call ref.listenSelf / ref.onDispose on Ref but it make no sense if WidgetRef can do that stuff 
+Another example is WidgetRef holds context of the widget associated to it but Ref doesn't
 
 ---
 
