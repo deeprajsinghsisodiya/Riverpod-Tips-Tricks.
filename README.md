@@ -1,5 +1,11 @@
 # Riverpod-Tips-Tricks.
 ---
+
+#### Q is it a good idea to use riverpod for camera controller or animation controller or any kind of widget and if not why?
+
+No. Widget controllers are “ephemeral state” (do a search in this discord, there’s plenty of discussion around it). Use hooks instead
+Controllers are often handled via a combo of useMemo to create the controller and useEffect to dispose the controller when it changes
+
 ---
 
 #### Q There seems to be no base ref that both Ref and WidgetRef share, I am definitively sure there is an apparent reason but what is it?
