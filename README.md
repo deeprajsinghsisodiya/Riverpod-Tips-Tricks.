@@ -1,4 +1,13 @@
 # Riverpod-Tips-Tricks.
+
+
+---
+
+#### Q Use of .when on ref.read
+
+yes... the key is that .when is a method on AsyncValues.  You can get AsyncValues back from .listen, .read, or .watch
+but only if the notifier is an AsyncNotifier or StreamNotifier.  A straight Notifier is not similarly wrapped
+
 ---
 
 #### Q is it a good idea to use riverpod for camera controller or animation controller or any kind of widget and if not why?
