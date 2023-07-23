@@ -3,6 +3,13 @@
 
 ---
 
+#### Q .Select USE
+
+ref.watch(fetchtherapistdetailsProvider.select((v) => v.valueOrNull?.therapistShortDescription))
+
+
+---
+
 #### Q Use of .when on ref.read
 
 yes... the key is that .when is a method on AsyncValues.  You can get AsyncValues back from .listen, .read, or .watch
