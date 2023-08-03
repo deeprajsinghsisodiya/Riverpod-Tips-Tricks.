@@ -3,6 +3,14 @@
 
 ---
 
+####  Q  How to Stream Close?
+
+final sub = ref.listen(...);
+ref.onDispose(sub.close);
+that works because sub is already initialied
+
+---
+
 #### Q .Select USE
 
 ref.watch(fetchtherapistdetailsProvider.select((v) => v.valueOrNull?.therapistShortDescription))
