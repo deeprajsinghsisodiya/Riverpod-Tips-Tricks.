@@ -3,6 +3,14 @@
 
 ---
 
+#### Q You can also use Ref.notifyListeners() after mutating the list to tell Rvierpod that the state has changed.
+
+state.removeAt(x);
+ref.notifyListeners();
+
+
+---
+
 ####  Q  How to Stream Close?
 
 final sub = ref.listen(...);
