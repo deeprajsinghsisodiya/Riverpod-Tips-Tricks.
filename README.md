@@ -1,6 +1,20 @@
 # Riverpod-Tips-Tricks.
 
 
+#### Q What is the prefered way to provide a provider with an initial value from outside.
+
+
+You must distinguish three possible sources for this.
+you might have multiple providers in play at once, with independent lifecycles, differentiated by some unique item, like an ID or a URL.
+you might have a provider that needs startup data to build, and that data isn't known initially, or takes a completed-future to get
+you might have a provider that has some initialization data that is likely constant for the current program execution.
+3 = use a const somewhere
+2 = have build do ref.watch(provider) for non-async, or await ref.watch(provider.future) for async stuff.
+1 = use family
+Does that help?
+do NOT use family for "initialization parameters" unless that's the natural family key.  Because to get back to that provider later, you'll need that same family key!
+
+
 ---
 
 #### Q You can also use Ref.notifyListeners() after mutating the list to tell Rvierpod that the state has changed.
