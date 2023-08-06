@@ -13,7 +13,9 @@ Future<int?> another(ref) async {
   ref.state = AsyncData(null);
   await soemthing;
   return 42;
-}```
+}
+
+```
  
 No AsyncLoading involved
 Or do:
