@@ -1,6 +1,31 @@
 # Riverpod-Tips-Tricks.
 
 
+
+---
+
+#### Q Skip loading on reload.
+
+You can do
+
+```dart @riverpod
+Future<int?> another(ref) async {
+  ref.state = AsyncData(null);
+  await soemthing;
+  return 42;
+}```
+ 
+No AsyncLoading involved
+Or do:
+if (ref.state.isRefreshing) ref.state= AsyncData(null)
+
+to skip only refreshing loadings and still have the initial one
+The point is about tweaking what the provider emit. They can chose not to emit an AsyncLoading
+
+
+---
+
+
 #### Q What is the prefered way to provide a provider with an initial value from outside.
 
 
