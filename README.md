@@ -1,5 +1,11 @@
 # Riverpod-Tips-Tricks.
 
+---
+
+#### Q how to Wait for future ?
+
+final (a, b) = (aFuture, bFuture).wait;
+https://api.flutter.dev/flutter/dart-async/FutureRecord2/wait.html
 
 
 ---
