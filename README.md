@@ -1,5 +1,14 @@
 # Riverpod-Tips-Tricks.
 
+
+---
+
+#### Q  Use KeepAlive on true or false ?
+
+remirousselet
+Try to do everything without it.
+Generally, you shouldn't need it. It's only needed when you don't respect Riverpod's declarative nature and try to have some persistent state, which is usually avoidable.
+
 ---
 
 #### Q how to Wait for future ?
