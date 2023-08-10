@@ -5,7 +5,8 @@
  #### Q Error : Cannot use ref functions after the dependency of a provider changed but before the provider rebuilt.
 
 read before calling any update methods Or methods that would cause a provider to rebuild
-Read all providers and store into local variables.
+Read all providers and store into local variables.(Can’t use ref.read while the provider is marked for rebuild
+So we do it beforehand)
 
 ---
 
