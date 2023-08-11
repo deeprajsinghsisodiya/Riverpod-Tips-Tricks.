@@ -1,5 +1,27 @@
 # Riverpod-Tips-Tricks.
 
+
+---
+
+#### Q Across the document it discourages using ref.watch() to assign callbacks to classes such as buttons:
+
+No that's not what it says.
+It discourages using ref.watch inside event handlers.
+The following is fine:
+
+Button(
+  onPressed: () => ref.watch(...)
+)
+Which is different from the follow (not fine):
+
+final increment = ref.watch(notifier).increment);
+
+Button(
+  onPressed: () => increment(),
+)
+That's the same logic for ref.read, but reversed.
+Using ref.read, the first case is discouraged and the second is fine.
+
 ---
 
  #### Q Error : Cannot use ref functions after the dependency of a provider changed but before the provider rebuilt.
