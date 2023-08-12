@@ -1,5 +1,18 @@
 # Riverpod-Tips-Tricks.
 
+---
+
+####  The previous and new value are compared using identical for performance reasons. If you do not want that, you can override this method to perform a deep comparison of the previous and new values.
+
+The method you need to override is called updateShouldNotify:
+
+@override
+  bool updateShouldNotify(CounterState previous, CounterState next) {
+    if (identical(previous, next)) return false; // if they're identical no need to compare with ==
+    // Add your == comparision
+    return true;
+  }
+
 
 ---
 
