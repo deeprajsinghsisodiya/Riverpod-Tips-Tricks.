@@ -1,5 +1,83 @@
 # Riverpod-Tips-Tricks.
 
+
+---
+#### Important changelog
+
+## 2.3.0
+
+- Added `StreamNotifier` + `StreamNotifierProvider`.
+  This is for building a `StreamProvider` while exposing ways to modify the stream.
+
+  It is primarily meant to be used using code-generation via riverpod_generator,
+  by writing:
+
+  ```dart
+  @riverpod
+  class Example extends _$Example {
+    @override
+    Stream<Model> build() {
+      // TODO return some stream
+    }
+  }
+  ```
+
+- Deprecated `StreamProvider.stream`
+  Instead of:
+
+  ```dart
+  ref.watch(provider.stream).listen(...)
+  ```
+
+  do:
+
+  ```dart
+  ref.listen(provider, (_, value) {...});
+  ```
+
+  Instead of:
+
+  ```dart
+  final a = StreamProvider((ref) {
+    return ref.watch(b.stream).map((e) => Model(e));
+  })
+  ```
+
+  Do:
+
+  ```dart
+  final a = FutureProvider((ref) async {
+    final e = await ref.watch(b.future);
+    return Model(e);
+  })
+  ```
+
+
+``` dart
+Added `provider.overrideWith((ref) => state`)
+- Added `FutureProviderRef.future`.
+- Deprecated `StateProvider.state`
+  Instead, use either `ref.watch(stateProvider)` or `ref.read(stateProvider.notifier).state =`
+- Deprecated `provider.overrideWithProvider`. Instead use `provider.overrideWith`
+- Added `Ref.notifyListeners()` to forcibly notify dependents.
+  This can be useful for mutable state.
+- Added `@useResult` to `Ref.refresh`/`WidgetRef.refresh`
+- Added `Ref.exists` to check whether a provider is initialized or not.
+- `FutureProvider`, `StreamProvider` and `AsyncNotifierProvider` now preserve the
+  previous data/error when going back to loading.
+  This is done by allowing `AsyncLoading` to optionally contain a value/error.
+- Added `AsyncValue.when(skipLoadingOnReload: bool, skipLoadingOnRefresh: bool, skipError: bool)`
+  flags to give fine control over whether the UI should show `loading`
+  or `data/error` cases.
+- Add `AsyncValue.requireValue`, to forcibly obtain the `value` and throw if in
+  loading/error state
+- Doing `ref.watch(futureProvider.future)` can no-longer return a `SynchronousFuture`.
+  That behavior could break various `Future` utilities, such as `Future.wait`
+- Add `AsyncValue.copyWithPrevious(..., isRefresh: false)` to differentiate
+  rebuilds from `ref.watch` vs rebuilds from `ref.refresh`.
+```
+
+
 ---
 
 ####  The previous and new value are compared using identical for performance reasons. If you do not want that, you can override this method to perform a deep comparison of the previous and new values.
