@@ -53,7 +53,7 @@
   ```
 
 
-``` dart
+
 Added `provider.overrideWith((ref) => state`)
 - Added `FutureProviderRef.future`.
 - Deprecated `StateProvider.state`
@@ -75,7 +75,6 @@ Added `provider.overrideWith((ref) => state`)
   That behavior could break various `Future` utilities, such as `Future.wait`
 - Add `AsyncValue.copyWithPrevious(..., isRefresh: false)` to differentiate
   rebuilds from `ref.watch` vs rebuilds from `ref.refresh`.
-```
 
 
 ---
