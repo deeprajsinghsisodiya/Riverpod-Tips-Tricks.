@@ -11,7 +11,7 @@ To disable it and show loading, set skipLoadingOnRefresh: false at .when
 
 ---
 
-#### Q what is a provider dependency?
+#### Q What is a provider dependency?
 
 It's a general programming term. The meaning is the same as in DI (Dependency Injection).
 If a provider uses something, that something is a dependency of the provider, no matter how the object is used.
