@@ -3,6 +3,14 @@
 
 ---
 
+#### Loding state default behaviour.
+
+Loading state is skipped by default when using ref.invalidate/ref.refresh (as it's common to be used with RefreshIndicator).
+To disable it and show loading, set skipLoadingOnRefresh: false at .when
+
+
+---
+
 #### Q what is a provider dependency?
 
 It's a general programming term. The meaning is the same as in DI (Dependency Injection).
