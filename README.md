@@ -3,7 +3,7 @@
 
 ---
 
-#### Loding state default behaviour.
+#### Q Loding state default behaviour.
 
 Loading state is skipped by default when using ref.invalidate/ref.refresh (as it's common to be used with RefreshIndicator).
 To disable it and show loading, set skipLoadingOnRefresh: false at .when
