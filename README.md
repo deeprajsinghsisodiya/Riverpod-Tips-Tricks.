@@ -2,6 +2,16 @@
 
 
 ---
+
+#### Q what is a provider dependency?
+
+It's a general programming term. The meaning is the same as in DI (Dependency Injection).
+If a provider uses something, that something is a dependency of the provider, no matter how the object is used.
+
+watch vs listen vs read does not matter in this discussion. In fact, Riverpod doesn't matter either.
+Widgets have dependencies too for example. Say you call Theme.of in a widget, then your widget has a dependency on ThemeData.
+
+---
 #### Important changelog
 
 ## 2.3.0
