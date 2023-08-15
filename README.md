@@ -23,7 +23,8 @@ switch (asyncValue) {
   case _: print('loading');
 }
 ```
-"when" with skipLoadingOnReload: true
+"when" with skipLoadingOnReload: true.
+
 Before:
 ```dart
 asyncValue.when(
@@ -42,6 +43,7 @@ switch (asyncValue) {
 }
 ```
 Alternatively, if the value is non-nullable, we can do:
+
 ```dart
 switch (asyncValue) {
   case AsyncValue(:final error?): print('Error $error'); // Make sure to check errors first
@@ -49,7 +51,8 @@ switch (asyncValue) {
   case _: print('loading');
 }
 ```
-"when" with skipError: true + skipLoadingOnReload: true
+"when" with skipError: true + skipLoadingOnReload: true.
+
 Before:
 ```dart
 asyncValue.when(
@@ -68,7 +71,8 @@ switch (asyncValue) {
   case _: print('loading');
 }
 ```
-"when" with skipError: true only
+"when" with skipError: true only.
+
 Before:
 ```dart
 asyncValue.when(
