@@ -3,6 +3,92 @@
 
 ---
 
+#### Now that Dart 3 has pattern matching, we should stop relying on "when"/"map" and instead use the syntax native to the language.
+
+Default "when" syntax (skipLoadingOnReload: false, skipLoadingOnRefresh: true, skipError: false)
+Before:
+```dart
+asyncValue.when(
+  data: (value) => print(value),
+  error: (error, stack) => print('Error $error'),
+  loading: () => print('loading'),
+);
+```
+After
+```dart
+switch (asyncValue) {
+  case AsyncData(:final value): print(data);
+  case AsyncError(:final error): print('Error $error');
+  case _: print('loading');
+}
+```
+"when" with skipLoadingOnReload: true
+Before:
+```dart
+asyncValue.when(
+  skipLoadingOnReload: true,
+  data: (value) => print(value),
+  error: (error, stack) => print('Error $error'),
+  loading: () => print('loading'),
+);
+```
+After
+```dart
+switch (asyncValue) {
+  case AsyncValue(:final error?): print('Error $error'); // Make sure to check errors first
+  case AsyncValue(:final value, hasData: true): print(data);
+  case _: print('loading');
+}
+```
+Alternatively, if the value is non-nullable, we can do:
+```dart
+switch (asyncValue) {
+  case AsyncValue(:final error?): print('Error $error'); // Make sure to check errors first
+  case AsyncValue(:final value?): print(data);
+  case _: print('loading');
+}
+```
+"when" with skipError: true + skipLoadingOnReload: true
+Before:
+```dart
+asyncValue.when(
+  skipLoadingOnReload: true,
+  skipError: true,
+  data: (value) => print(value),
+  error: (error, stack) => print('Error $error'),
+  loading: () => print('loading'),
+);
+```
+After
+```dart
+switch (asyncValue) {
+  case AsyncValue(:final value, hasData: true): print(data);
+  case AsyncValue(:final error?): print('Error $error'); // Check errors after data
+  case _: print('loading');
+}
+```
+"when" with skipError: true only
+Before:
+```dart
+asyncValue.when(
+  skipError: true,
+  data: (value) => print(value),
+  error: (error, stack) => print('Error $error'),
+  loading: () => print('loading'),
+);
+```
+After
+```dart
+switch (asyncValue) {
+  case AsyncValue(:final value, hasData: true, isReloading: false): print(data);
+  case AsyncValue(:final error?): print('Error $error'); // Check errors after data
+  case _: print('loading');
+}
+```
+
+
+---
+
 #### Q Loding state default behaviour.
 
 Loading state is skipped by default when using ref.invalidate/ref.refresh (as it's common to be used with RefreshIndicator).
