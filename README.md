@@ -5,7 +5,8 @@
 
 #### Now that Dart 3 has pattern matching, we should stop relying on "when"/"map" and instead use the syntax native to the language.
 
-Default "when" syntax (skipLoadingOnReload: false, skipLoadingOnRefresh: true, skipError: false)
+Default "when" syntax (skipLoadingOnReload: false, skipLoadingOnRefresh: true, skipError: false).
+
 Before:
 ```dart
 asyncValue.when(
