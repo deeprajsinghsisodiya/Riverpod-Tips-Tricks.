@@ -1,5 +1,10 @@
 # Riverpod-Tips-Tricks.
 
+---
+#### Q What to return in async notifier class.
+
+From build, you return the State, not AsyncValue<State>
+in the mutate methods, you set state = AsyncValue<State>
 
 ---
 
