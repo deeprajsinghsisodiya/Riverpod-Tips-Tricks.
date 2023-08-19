@@ -2,7 +2,12 @@
 
 ---
 
+#### Q The provider is disposed while  state = await AsyncValue.guard is running. so Unhandled Exception: Bad state: Future already completed was thrown. Any practical solution for this?
+
+Remi said you should check if the provider is disposed before setting the state. something like checking mounted for BuildContext.
+
 ---
+
 #### Q What to return in async notifier class.
 
 From build, you return the State, not AsyncValue<State>
