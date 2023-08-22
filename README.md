@@ -1,5 +1,19 @@
 # Riverpod-Tips-Tricks.
 
+
+---
+Q You can declare private properties inside the notifier class, such as late Controller controller
+
+If you want to assign a value to a private property once and use the same value when the provider rebuild, you can do:
+``` dart
+Some? _some;
+@override
+SomeObject build() {
+  if(_some==null) _some = Some();
+  ...
+}
+```
+
 ---
 
 #### Q The provider is disposed while  state = await AsyncValue.guard is running. so Unhandled Exception: Bad state: Future already completed was thrown. Any practical solution for this?
