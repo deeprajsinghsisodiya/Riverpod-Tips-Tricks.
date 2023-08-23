@@ -19,7 +19,6 @@ FutureProvider should exclusively be used for "reads" instead, such as an "HTTP 
 
 - For updates, you should instead use a method on a Notifier.
 To track the progress of that operation, your method could return a Future. Then, you could use a FutureBuilder or useFuture inside your widgets to show the progress of this operation on the screen.
-
 There are plans to make tracking the progress of updates simpler, through mutations
 
 - AVOID storing TextEditingControllers and similar objects inside providers.
