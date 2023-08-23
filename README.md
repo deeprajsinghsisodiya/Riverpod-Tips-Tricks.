@@ -2,6 +2,63 @@
 
 
 ---
+
+-AVOID dynamically created providers. Providers should always be top-level final variables.
+It is highly encouraged to use riverpod_lint and enable lint-rules which warn if a provider isn't top-level
+
+- AVOID have ref.watch/listen/read invocations where the obtained provider is statically unknown.
+The provider variable should always point to where the provider was defined.
+This is important for static analysis, which is crucial for making your codebase more maintainable.
+As such, it is highly encouraged to use riverpod_lint and enable lint-rules which warn if a provider is unknown statically
+
+- AVOID using providers for performing "side effects".
+For example, do not use a FutureProvider to track a "post" request.
+FutureProvider should exclusively be used for "reads" instead, such as an "HTTP get" or a database read.
+
+- For updates, you should instead use a method on a Notifier.
+To track the progress of that operation, your method could return a Future. Then, you could use a FutureBuilder or useFuture inside your widgets to show the progress of this operation on the screen.
+
+There are plans to make tracking the progress of updates simpler, through mutations
+
+- AVOID storing TextEditingControllers and similar objects inside providers.
+Providers are for shared business state. They should not be used for local widget state, such as form fields or animations.
+Instead, store those inside StatefulWidgets or using flutter_hooks.
+Failing to do so could cause your TextEditingControllers to incorrectly get reused.
+
+- AVOID relying on initializing state through mutating a provider with a side-effect (such as on click).
+Providers should directly initialize themselves on read.
+If you want to delay the initialization, instead you can conditionally watch/listen the provider.
+
+- AVOID storing a route-specific parameter in a provider through a mutation.
+You may be tempted to do:
+```
+onClick: () {
+  ref.read(provider.notifier).setSelectedUser(userId);
+  Navigator.push(context, UserPage());
+```
+The problem is, it is entirely possible that multiple UserPage could be prevent in your navigation history.
+In this case, they would share the same userId, which is undesired. We would want both pages to act independently.
+
+The solution is to instead pass the ID manually to the route:
+```
+onClick: () {
+  Navigator.push(context, UserPage(userId));
+```
+You may alternatively rely on provider scoping to do:
+```
+onClick: () {
+  ref.read(provider.notifier).setSelectedUser(userId);
+  Navigator.push(
+    context, 
+    ProviderScope(
+      overrides: [currentUserIdProvider.overrideWithValue(userId)],
+      child: UserPage(),
+    ),
+  );
+```
+
+
+---
 Q You can declare private properties inside the notifier class, such as late Controller controller
 
 If you want to assign a value to a private property once and use the same value when the provider rebuild, you can do:
