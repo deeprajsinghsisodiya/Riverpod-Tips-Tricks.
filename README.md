@@ -3,6 +3,8 @@
 
 ---
 
+#### DOs/AVOID/DON'T of Riverpod
+
 - AVOID dynamically created providers. Providers should always be top-level final variables.
 It is highly encouraged to use riverpod_lint and enable lint-rules which warn if a provider isn't top-level
 
@@ -31,7 +33,7 @@ If you want to delay the initialization, instead you can conditionally watch/lis
 
 - AVOID storing a route-specific parameter in a provider through a mutation.
 You may be tempted to do:
-```
+```dart
 onClick: () {
   ref.read(provider.notifier).setSelectedUser(userId);
   Navigator.push(context, UserPage());
@@ -40,12 +42,12 @@ The problem is, it is entirely possible that multiple UserPage could be prevent 
 In this case, they would share the same userId, which is undesired. We would want both pages to act independently.
 
 The solution is to instead pass the ID manually to the route:
-```
+```dart
 onClick: () {
   Navigator.push(context, UserPage(userId));
 ```
 You may alternatively rely on provider scoping to do:
-```
+```dart
 onClick: () {
   ref.read(provider.notifier).setSelectedUser(userId);
   Navigator.push(
