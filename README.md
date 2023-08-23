@@ -18,8 +18,7 @@ For example, do not use a FutureProvider to track a "post" request.
 FutureProvider should exclusively be used for "reads" instead, such as an "HTTP get" or a database read.
 
 - For updates, you should instead use a method on a Notifier.
-To track the progress of that operation, your method could return a Future. Then, you could use a FutureBuilder or useFuture inside your widgets to show the progress of this operation on the screen.
-There are plans to make tracking the progress of updates simpler, through mutations
+To track the progress of that operation, your method could return a Future. Then, you could use a FutureBuilder or useFuture inside your widgets to show the progress of this operation on the screen. There are plans to make tracking the progress of updates simpler, through mutations
 
 - AVOID storing TextEditingControllers and similar objects inside providers.
 Providers are for shared business state. They should not be used for local widget state, such as form fields or animations.
