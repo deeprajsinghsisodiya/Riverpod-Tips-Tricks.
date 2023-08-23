@@ -3,7 +3,7 @@
 
 ---
 
--AVOID dynamically created providers. Providers should always be top-level final variables.
+- AVOID dynamically created providers. Providers should always be top-level final variables.
 It is highly encouraged to use riverpod_lint and enable lint-rules which warn if a provider isn't top-level
 
 - AVOID have ref.watch/listen/read invocations where the obtained provider is statically unknown.
