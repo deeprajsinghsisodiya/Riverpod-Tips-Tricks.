@@ -36,7 +36,7 @@ onClick: () {
   ref.read(provider.notifier).setSelectedUser(userId);
   Navigator.push(context, UserPage());
 ```
-&nbsp; &nbsp; &nbsp; The problem is, it is entirely possible that multiple UserPage could be prevent in your navigation history. In this case, &nbsp; &nbsp; &nbsp; they would share the same userId, which is undesired. We would want both pages to act independently. The solution &nbsp; &nbsp; &nbsp; is to instead pass the ID manually to the route:
+&nbsp; &nbsp; &nbsp; The problem is, it is entirely possible that multiple UserPage could be prevent in your navigation history. In this case, &nbsp; &nbsp; &nbsp; they would share the same userId, which is undesired. We would want both pages to act independently. The &nbsp; &nbsp; &nbsp; solution  is to instead pass the ID manually to the route:
 ```dart
 onClick: () {
   Navigator.push(context, UserPage(userId));
