@@ -3,7 +3,7 @@
 
 ---
 
-#### DOs/AVOID/DON'T of Riverpod
+####  DOs/AVOID/DON'T of Riverpod
 
 - AVOID dynamically created providers. Providers should always be top-level final variables.
 It is highly encouraged to use riverpod_lint and enable lint-rules which warn if a provider isn't top-level
