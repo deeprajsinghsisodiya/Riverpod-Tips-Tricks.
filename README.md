@@ -3,6 +3,40 @@
 
 ---
 
+#### Behaviour By default, the previous and new value are compared using identical for performance reasons.
+updateShouldNotify method
+```dart
+@protected
+bool updateShouldNotify(
+State previous,
+State next
+)
+```
+inherited
+A method invoked when the state exposed by this Notifier changes. It compares the previous and new value, and return whether listeners should be notified.
+
+By default, the previous and new value are compared using identical for performance reasons.
+
+Doing so ensured that doing:
+
+state = 42;
+state = 42;
+does not notify listeners twice.
+
+But at the same time, for very complex objects with potentially dozens if not hundreds of properties, Riverpod won't deeply compare every single value.
+
+This ensures that the comparison stays efficient for the most common scenarios. But it also means that listeners should be notified even if the previous and new values are considered "equal".
+
+If you do not want that, you can override this method to perform a deep comparison of the previous and new values.
+```dart
+Implementation
+@protected
+bool updateShouldNotify(State previous, State next) {
+  return !identical(previous, next);
+}
+```
+---
+
 ####  DOs/AVOID/DON'T of Riverpod
 
 - AVOID dynamically created providers. Providers should always be top-level final variables.
