@@ -1,5 +1,16 @@
 # Riverpod-Tips-Tricks.
 
+---
+
+Using ref inside onDispose is generally not allowed. Especially ref.invalidate/refresh.
+The fact that sometimes you do not get an error is the bug here. It should never work.
+
+#### Q  so how can I dispose a provider if I cant use ref in dispose?
+
+Do it in the setState / provider change which triggered this widget to get unmounted. onWillPop could be a good place too.
+
+But honestly you probably should be using autoDispose
+
 
 ---
 
