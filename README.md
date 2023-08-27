@@ -3,7 +3,7 @@
 
 
 ---
-#### Q How to wait for two providers value?
+#### Q How to wait for values of two providers ?
 
 it's a bit tricky if you're waiting for both the inputs, but you can also just do that with
 ```dart
