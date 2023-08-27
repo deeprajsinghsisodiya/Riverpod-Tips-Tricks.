@@ -6,7 +6,8 @@
 #### Q How to wait for two providers value?
 
 it's a bit tricky if you're waiting for both the inputs, but you can also just do that with
-```dart final(v1, v2) = await (ref.read(p1.future),ref.read(p2.future)).wait;
+```dart
+  final(v1, v2) = await (ref.read(p1.future),ref.read(p2.future)).wait;
 ```
 
 that will wait until both p1 and p2 are out of loading, and give you their two values, even though you're not technically "watching" the providers.
