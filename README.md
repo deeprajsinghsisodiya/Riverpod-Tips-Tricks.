@@ -1,6 +1,9 @@
 # Riverpod-Tips-Tricks.
 
 
+---
+
+####  providers should always be top-level variables.
 
 ---
 #### Q How to wait for values of two providers ?
