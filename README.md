@@ -3,6 +3,29 @@
 
 ---
 
+When a provider has parameters, its overrideWith function should offer a way to access those parameters.
+The likely most logical solution is to expose those parameters in the ref object:
+```dart
+@riverpod
+int example(ExampleRef ref, {int? id}) {
+   int? id = ref.id; // Params accessible here
+}
+```
+
+// This enables the following:
+```dart
+example.overrideWith((ref) => ref.id + 1);
+```
+The alternative is to pass the parameters to the callback directly:
+```dart
+example.overrideWith((ref, {id}) => ref.id + 1);
+```
+But this gets tricky when considering default values/required/optionals and can be quite verbose.
+
+This requires a breaking change due to the new ref passed to the overrideWith callback using a more specific type in the provider subclass. This breaks the inheritance, and therefore requires deeper changes to support.
+
+---
+
 ####  providers should always be top-level variables.
 
 ---
