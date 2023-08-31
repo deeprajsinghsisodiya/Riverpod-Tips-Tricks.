@@ -2,6 +2,32 @@
 
 
 ---
+#### Q Use of record to get values from there providers
+
+```dart
+build () {
+  final (one, two, three) = await (
+    ref.watch(oneProvider.future),
+    ref.watch(twoProvider.future),
+    ref.watch(threeProvider.future),
+  ).wait;
+  // now use one two three for a collective value
+  return (one, two, three);
+}
+```
+
+```dart
+return ref.watch(rollupProvider).when(
+  data: (data) {
+    final (one, two, three) = data;
+    // return widget using one two three
+  },
+  error: (e, s) => // something
+  loading: () => Spinner(),
+);
+```
+
+---
 
 When a provider has parameters, its overrideWith function should offer a way to access those parameters.
 The likely most logical solution is to expose those parameters in the ref object:
