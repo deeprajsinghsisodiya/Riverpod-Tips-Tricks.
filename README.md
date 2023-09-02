@@ -2,6 +2,18 @@
 
 
 ---
+####  Use of .select to prevent unnecessary builds?
+
+If the slug is a property inside some data class, you can use .select to prevent unnecessary rebuilds:
+
+```dart
+Thing something(SomethingRef ref) {
+  ref.watch(authStateProvider.select((user) => user.slug));
+  return ...;
+}
+```
+
+---
 #### Q Use of record to get values from there providers
 
 ```dart
