@@ -1,5 +1,17 @@
 # Riverpod-Tips-Tricks.
 
+---
+
+#### Q How can I update the state from a StateNotifier when I want to remove a list of strings. 
+
+Use Iterable.where and change the state to the result of that
+Or you could fix the spread to include the where call
+```dart
+state = [...state.where(…)]; or
+state = state.where(…).toList();
+
+```
+
 
 ---
 ####  Use of .select to prevent unnecessary builds?
