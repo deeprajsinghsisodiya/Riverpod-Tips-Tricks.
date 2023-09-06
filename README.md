@@ -1,6 +1,37 @@
 # Riverpod-Tips-Tricks.
 
 ---
+####  Obvious lacks of notifyListeners when doing mutations.
+
+Bad:
+```dart
+@riverpod
+class Example extends _$Example {
+  List<Item> build() => [];
+
+  void addItem(Item item) {
+    state.add(item); // Mutation but no notifyListeners()
+    // works with variants, like `state.value = 42`
+  }
+}
+```
+
+```dart
+@riverpod
+class Example extends _$Example {
+  Int build() => 0
+
+  void doSomethingAsync(Item item) async {
+    state++;
+    await future;
+    // Even though there is a notifyListeners, it is after an async gap.
+    // The notifyListeners should be above the await
+    notifyListeners();
+  }
+}
+```
+
+---
 
 #### Q How can I update the state from a StateNotifier when I want to remove a list of strings. 
 
