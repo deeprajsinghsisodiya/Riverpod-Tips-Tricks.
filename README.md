@@ -1,5 +1,18 @@
 # Riverpod-Tips-Tricks.
 
+
+
+
+---
+
+#### Q When I compare two same AsyncData<List>, it always returns false as well. Is this a bug?
+
+It's because [1] == [1] is false.
+If you use const [1] == const [1], only then it will be true.
+You can either use a constants or use a list which overrides ==
+
+---
+
 #### Unhandled Exception: Bad state: "Future already completed" when using AsyncValue.guard in AsyncNotifier.
 
 I think that exception should be suppressed (mostly a bug). It's happening because you're updating state after the provider is disposed. It should be ignored by riverpod anyway (which is not happening in your case).
