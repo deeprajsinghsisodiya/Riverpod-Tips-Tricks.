@@ -1,5 +1,22 @@
 # Riverpod-Tips-Tricks.
 
+#### Unhandled Exception: Bad state: "Future already completed" when using AsyncValue.guard in AsyncNotifier.
+
+I think that exception should be suppressed (mostly a bug). It's happening because you're updating state after the provider is disposed. It should be ignored by riverpod anyway (which is not happening in your case).
+
+A workaround is to temporary listen for the provider until the future is complete:
+
+```dart
+        child: ElevatedButton(
+          onPressed: () async {
+            final sub =
+                ref.listenManual(sampleNotifierProvider.notifier, (_, __) {});
+            await sub.read().fetch();
+            sub.close();
+          },
+          child: const Text('Fetch'),
+        ),
+```
 ---
 
 #### Things to consider while using wigetRef.
