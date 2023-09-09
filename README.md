@@ -1,5 +1,14 @@
 # Riverpod-Tips-Tricks.
 
+
+---
+
+#### Q How i can run subscription in a long-lived isolate,
+
+You can access providers by defining a new ProviderContainer inside your isolate same as tests. That's a benefit of riverpod being able to work with only dart code.
+
+Check the "Dart only" code at https://docs-v2.riverpod.dev/docs/cookbooks/testing
+
 ---
 ####  Obvious lacks of notifyListeners when doing mutations.
 
