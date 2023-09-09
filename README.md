@@ -1,5 +1,15 @@
 # Riverpod-Tips-Tricks.
 
+---
+
+#### Things to consider while using wigetRef.
+
+Code should never use one or the other.
+
+If you have code which conditionally uses Ref and WidgetRef, refactor those WidgetRefs to move the logic in a provider such that you now use a Ref.
+
+Relying on WidgetRef is equivalent to putting your logic in the UI. And Ref vs WidgetRef have different behaviours/life-cycles
+
 
 ---
 
