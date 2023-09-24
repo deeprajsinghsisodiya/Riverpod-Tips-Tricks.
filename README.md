@@ -1,6 +1,32 @@
 # Riverpod-Tips-Tricks.
 
 
+---
+
+#### Q How to Refresh Combined async notifier providers.
+
+
+``` dart
+final futureProvider = AsyncNotifierProvider<MyNotifier, int>(MyNotifier.new);
+
+class MyNotifier extends AsyncNotifier<int> {
+  @override
+  Future<int> build() async {
+    final future1 = await ref.watch(futureProvider1.future);
+    final future2 = await ref.watch(futureProvider2.future);
+  
+    return future1 + future2;
+  }
+
+  Future<int> refresh() {
+    ref.invalidate(futureProvider1);
+    ref.invalidate(futureProvider2);
+    return future;
+  }
+}
+Used as ref.read(futureProvider.notifier).refresh()
+
+```
 
 
 ---
