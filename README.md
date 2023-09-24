@@ -25,6 +25,7 @@ class MyNotifier extends AsyncNotifier<int> {
   }
 }
 ```
+
 Used as ref.read(futureProvider.notifier).refresh()
 
 
