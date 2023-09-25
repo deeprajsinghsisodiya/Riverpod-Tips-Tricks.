@@ -3,6 +3,34 @@
 
 ---
 
+#### Q How to Warm up the providers.
+
+```dart 
+@riverpod
+class WarmUp extends _$WarmUp {
+  bool _warmedUp = false;
+
+  @override
+  Future<void> build() async {
+    if (_warmedUp) return;
+
+    ref.listenSelf((previous, next) {
+      next.whenData((_) {
+        _warmedUp = true;
+        ref.invalidateSelf();
+      });
+    });
+
+    await Future.wait([
+      for (final p in [provider1, provider2, provider3])       
+        ref.watch(p.future),
+    ]);
+  }
+}
+
+```
+---
+
 #### Q How to Refresh Combined async notifier providers.
 
 
