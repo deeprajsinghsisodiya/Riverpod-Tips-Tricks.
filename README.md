@@ -1,5 +1,12 @@
 # Riverpod-Tips-Tricks.
 
+---
+
+#### Q Can I have a unique AsyncNotifier for each note in a note taking app?
+
+The right way to do it is to use family, yes.
+That's what it does. It creates a unique provider per unique parameter.
+
 
 ---
 
