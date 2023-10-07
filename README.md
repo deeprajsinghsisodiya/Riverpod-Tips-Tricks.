@@ -2,6 +2,14 @@
 
 ---
 
+#### Q What is the difference between future and state? MyOwnCounter theCounter = await this.future;
+I recognized that in state.requireValue the build method gets called
+
+
+One is synchronous, the other isn't
+
+---
+
 #### Q Can I have a unique AsyncNotifier for each note in a note taking app?
 
 The right way to do it is to use family, yes.
