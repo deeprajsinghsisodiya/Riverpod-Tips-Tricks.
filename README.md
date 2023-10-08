@@ -1,5 +1,12 @@
 # Riverpod-Tips-Tricks.
 
+
+---
+
+#### Q Difference betwen state.value! and state.requireValue ?
+
+dont use state.value! use state.requireValue it does the same thing but it will throw with whatever error is stored inside
+
 ---
 
 #### Q What is the difference between future and state? MyOwnCounter theCounter = await this.future;
