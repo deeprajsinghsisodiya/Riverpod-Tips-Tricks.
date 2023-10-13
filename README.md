@@ -1,5 +1,13 @@
 # Riverpod-Tips-Tricks.
 
+---
+
+#### Q "why immutable data" in riverpod?
+
+Immutability is more about maintainability and  efficient diff logic.
+
+Mutability tends to promote spaghetti code, since the mutation could be placed anywhere. Immutability centralizes the logic where the state is updated.
+Immutability enables restricting what can and cannot modify a given object.
 
 ---
 
