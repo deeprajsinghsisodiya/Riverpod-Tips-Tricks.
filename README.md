@@ -1,5 +1,76 @@
 # Riverpod-Tips-Tricks.
 
+
+---
+
+
+
+#### Q Hi, how to watch a notifier from another notifier? For example, I have 2 notifiers: Counter1 and Counter2, I want to watch the Counter2's state inside the Counter1 and update the velocity variable. I can't just ref.watch the Counter2 because it'll reset the Counter1 back to 0. I've found the solution: read and listen (this is like watch but doesn't rebuild the notifier), but is there any better way?
+
+Full code: https://dartpad.dev/?id=a25cb16963f74d832dbeea2bd4c90822
+```dart
+Snippet of the notifiers:
+class Counter1 extends AutoDisposeNotifier<int> {
+  static final provider =
+      NotifierProvider.autoDispose<Counter1, int>(Counter1.new);
+
+  late int velocity;
+
+  @override
+  int build() {
+    // I want to watch the counter2, but it'll reset the counter1 to 0
+    // velocity = ref.watch(Counter2.provider);
+
+    // I can read + listen instead
+    velocity = ref.read(Counter2.provider);
+    ref.listen<int>(Counter2.provider, (previous, next) {
+      velocity = next;
+    });
+    return 0;
+  }
+
+  void increment() {
+    state = state + velocity;
+  }
+}
+
+class Counter2 extends AutoDisposeNotifier<int> {
+  static final provider =
+      NotifierProvider.autoDispose<Counter2, int>(Counter2.new);
+
+  @override
+  int build() => 1;
+
+  void increment() => state = state + 1;
+}
+
+```
+
+if you want to subscribe to another provider, but not just rebuild, listen is the way
+you can get notified, and take whatever action you want.
+THis is one way to build an aggregate data from a streamprovider, for example.
+@safek ^^
+you can .listen with fireImmediately to avoid having to read the provider separately
+What is velocity in Counter1?  It does not appear to be part of your state.
+Oh... you use it
+
+yeah, so
+```dart
+   velocity = ref.read(Counter2.provider);
+    ref.listen<int>(Counter2.provider, (previous, next) {
+      velocity = next;
+    });
+```
+can be replaced with
+```dart
+ref.listen(Counter2.provider, (prev, next) {
+  velocity = next;
+}, fireImmediately: true);
+```
+
+
+
+
 ---
 
 #### Q "why immutable data" in riverpod?
