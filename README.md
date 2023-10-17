@@ -3,6 +3,13 @@
 
 ---
 
+RandalSchwartz - public notifier mutators should not return anything but void or Future<void> and update state directly. 
+
+remirousselet  - I disagree. It's fine to return the new state for instance
+
+
+---
+
 
 
 #### Q Hi, how to watch a notifier from another notifier? For example, I have 2 notifiers: Counter1 and Counter2, I want to watch the Counter2's state inside the Counter1 and update the velocity variable. I can't just ref.watch the Counter2 because it'll reset the Counter1 back to 0. I've found the solution: read and listen (this is like watch but doesn't rebuild the notifier), but is there any better way?
