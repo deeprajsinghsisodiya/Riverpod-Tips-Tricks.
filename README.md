@@ -3,6 +3,24 @@
 
 ---
 
+#### Q combining AsyncNotifier state and prevent unwanted AsyncLoading
+
+
+You're free to set state immediately as the build starts to remove the loading state
+
+Since you have access to the previous value/error, that should be doable.
+
+build() async {
+  // Remove loading state from refreshes/reloads
+  if (state.hasError) state = AsyncError(state.error!, state.stackTrace!);
+  else if (state.hasData) state = AsyncData(state.requireValue);
+
+  await whatever();
+}
+
+
+---
+
 RandalSchwartz - public notifier mutators should not return anything but void or Future<void> and update state directly. 
 
 remirousselet  - I disagree. It's fine to return the new state for instance
