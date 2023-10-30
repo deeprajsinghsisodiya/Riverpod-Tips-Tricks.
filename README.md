@@ -1,5 +1,11 @@
 # Riverpod-Tips-Tricks.
 
+---
+
+#### Q i use ref.listen method for showing loading when user click todo. but, when i refresh with refresh indicator, it also show that loading?
+
+You want to use `if (isLoading && !isReloading && !isRefreshing)`
+
 
 ---
 
