@@ -1,5 +1,15 @@
 # Riverpod-Tips-Tricks.
 
+
+---
+
+#### Watch & Listen
+
+ref.watch = REBUILD ME when THAT CHANGES
+ref.listen = I DECIDE IF I SHOULD REBUILD
+so watch and listen do very specifically different things
+also ref.watch could watch a .select, which would be a narrowed rebuild
+
 ---
 
 #### Q i use ref.listen method for showing loading when user click todo. but, when i refresh with refresh indicator, it also show that loading?
