@@ -3,6 +3,28 @@
 
 ---
 
+#### Example of .wait. type Safe.
+```dart
+@riverpod
+Future<CourseInfo> courseInfo(CourseInfoRef ref, int courseId) async {
+  final course = ref.watch(courseControllerProvider(courseId).future);
+  final modules = ref.watch(courseModulesControllerProvider(courseId).future);
+  final blocks = ref.watch(courseBlocksControllerProvider(courseId).future);
+  final (one, two, three) = await (
+    course,
+    modules,
+    blocks,
+  ).wait;
+  return CourseInfo(
+    course: one!,
+    modules: two,
+    blocks: three,
+  );
+}
+```
+
+---
+
 #### Watch & Listen
 
 ref.watch = REBUILD ME when THAT CHANGES
