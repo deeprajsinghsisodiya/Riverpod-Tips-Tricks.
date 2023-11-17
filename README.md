@@ -1,4 +1,17 @@
 # Riverpod-Tips-Tricks.
+---
+##### Technically you can just update the storage in that method.
+
+```dart
+build() {
+  ref.listenSelf((prev, next) {
+    if (next.hasData) {
+      saveSettingsToDisk(next.requireValue);
+    }
+  });
+  ...
+}
+```
 
 
 ---
