@@ -1,4 +1,19 @@
 # Riverpod-Tips-Tricks.
+
+
+---
+#### Could you elaborate a little bit on ProviderScope.containerOf(..) what does this exactly do? iS it just a way to access the relevant container?
+
+
+final container = ProviderScope.containerOf(context);
+final someState = container.read(someProvider);
+// your logic here
+
+As any other .of method, it looks up to your tree for a ProviderContainer, which you (hopefully) gave at the root with ProviderScope(child: YourApp()).
+Riverpod's caches / state live inside such container, which is created up there, so this is the only way to access state with no ref but just context and outside of a widget. 
+Indeed, it has been suggested several times that go_router's GoRouteDatas should be just a Widget, but this suggestion is kind-of being ignored by the Flutter routing team as of now 
+
+
 ---
 ##### Technically you can just update the storage in that method.
 
