@@ -2,6 +2,18 @@
 
 
 ---
+
+#### Q Specifically I am wondering what the benefit would be of updating one of our existing StateNotifier that uses an AsyncValue wrapped around the base object to be an AsyncNotifier.
+
+The benefits I can remember is:
+
+Auto handling loading/errors for the build method.
+Ref is a property in the notifier class so you don't have to pass it through the constructor.
+Only build method will re-execute when the provider rebuilds while the notifier class is preserved. This give us the ability to preserve some state across rebuilds.
+Support the new tags of .when such as skipLoading & skipErrors and will support the upcoming features.
+Support code-generation which will be easy to migrate to meta programming in the future.
+
+---
 #### Could you elaborate a little bit on ProviderScope.containerOf(..) what does this exactly do? iS it just a way to access the relevant container?
 
 
