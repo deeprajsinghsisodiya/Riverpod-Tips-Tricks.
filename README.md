@@ -13,6 +13,11 @@ Ref is a property in the notifier class so you don't have to pass it through the
 Only build method will re-execute when the provider rebuilds while the notifier class is preserved. This give us the ability to preserve some state across rebuilds.
 Support the new tags of .when such as skipLoading & skipErrors and will support the upcoming features.
 Support code-generation which will be easy to migrate to meta programming in the future.
+
+
+Think of AsyncNotifier as a FutureProvider with ways to modify the state.
+
+It's much simpler to deal with a CRUD, where the build method of your AsyncNotifier does a GET, and methods on the notifier do the updates
 ```
 
 ---
