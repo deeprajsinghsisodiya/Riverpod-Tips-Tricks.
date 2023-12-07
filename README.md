@@ -1,6 +1,18 @@
 # Riverpod-Tips-Tricks.
 
 
+
+---
+#### Invalidate and read for preload
+
+Pretty sure invalidate doesn’t cause a provider to load
+You should read the FutureProvider.future and await it
+Although, that implies that you must handle any error as a result of the Future
+Unless the page alr does that, ig
+
+ref.invalidate doesn't preload.  ref.read does.
+presuming there's some keepalive going on
+
 ---
 
 #### Q Specifically I am wondering what the benefit would be of updating one of our existing StateNotifier that uses an AsyncValue wrapped around the base object to be an AsyncNotifier.
