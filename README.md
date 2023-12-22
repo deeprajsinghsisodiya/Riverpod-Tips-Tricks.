@@ -1,6 +1,12 @@
 # Riverpod-Tips-Tricks.
 
 
+---
+####  Is it possible to read the value of its state as a Future not AsyncValue? like await ref.watch(provider)
+
+final value = await ref.watch(provider.future);
+
+
 
 ---
 #### Invalidate and read for preload
