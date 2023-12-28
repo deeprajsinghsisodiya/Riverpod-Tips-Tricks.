@@ -1,5 +1,9 @@
 # Riverpod-Tips-Tricks.
+---
 
+#### Q Difference between  `provider.copyWithPrevious` and `provider.unwrapPrevious`?
+
+unwrapPrevious is for folks who want to ignore the "previous data/error" during reloads
 
 ---
 ####  Is it possible to read the value of its state as a Future not AsyncValue? like await ref.watch(provider)
