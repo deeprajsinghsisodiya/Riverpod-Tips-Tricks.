@@ -1,4 +1,29 @@
 # Riverpod-Tips-Tricks.
+
+
+---
+
+
+#### For reference, even if these APIs won't be part of the initial 2.0 release:
+they will be added in the future
+you can implement cacheTime yourself using ref.keepAlive() + a Timer()
+
+ about implementing cacheTime on your own:
+```dart
+extension on AutoDisposeRef {
+  // When invoked keeps your provider alive for [duration]
+  void cacheFor(Duration duration) {
+    final link = keepAlive();
+    final timer = Timer(duration, () => link.close());
+    ref.onDispose(() => timer.cancel());
+  }
+}
+
+final myProvider = Provider.autoDispose<int>((ref) {
+  ref.cacheFor(Duration(minutes: 5));
+});
+
+```
 ---
 
 #### Q Difference between  `provider.copyWithPrevious` and `provider.unwrapPrevious`?
