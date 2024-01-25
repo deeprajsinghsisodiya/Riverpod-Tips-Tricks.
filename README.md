@@ -3,6 +3,13 @@
 
 ---
 
+####  Replace List with IList (fast_immutable_collections) and you get two for one immutable, and == works.
+
+https://pub.dev/documentation/fast_immutable_collections/latest/fast_immutable_collections/IList/unorderedEqualItems.html
+If the order doesn't matter, and all items are distinct, use ISet instead of IList
+
+---
+
 
 #### For reference, even if these APIs won't be part of the initial 2.0 release:
 they will be added in the future
