@@ -1,6 +1,13 @@
 # Riverpod-Tips-Tricks.
 
 ---
+
+Business logic would sit in the nearest ancestor folder shared will all views that use it.
+If only a single view uses it, then next to that view.
+If you start using it in 2+ views, you then move it to an ancestor folder
+
+
+---
 #### Q Is there a way to use .select for more than one element? Or is it only possible to select one element? To reduce rebuilds of elements I don't need to listen to.
 
 Call it multiple times, or return a record/tuple
