@@ -1,5 +1,15 @@
 # Riverpod-Tips-Tricks.
 
+---
+#### Q Is there a way to use .select for more than one element? Or is it only possible to select one element? To reduce rebuilds of elements I don't need to listen to.
+
+Call it multiple times, or return a record/tuple
+
+final (name, email) = ref.watch(profileProvider.select((value) => (value.name, value.email)));
+ 
+The other approach:
+final name = ref.watch(profileProvider.select((value) => value.name));
+final email = ref.watch(profileProvider.select((value) => value.email));
 
 ---
 
