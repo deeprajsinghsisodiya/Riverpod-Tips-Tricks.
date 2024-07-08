@@ -1,6 +1,6 @@
 # Riverpod-Tips-Tricks.
 
-'''dart
+
 
 ```dart
 import 'package:flutter/material.dart';
@@ -65,7 +65,6 @@ class ThemeModeState with _$ThemeModeState {
 }
 ```
 
-'''
 
 ---
 
