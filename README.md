@@ -1,5 +1,72 @@
 # Riverpod-Tips-Tricks.
 
+'''dart
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'main.freezed.dart';
+part 'main.g.dart';
+
+void main() async {
+  final ProviderContainer container = ProviderContainer();
+
+  final themeModeNotifier = container.read(themeModeNotifierProvider.notifier);
+
+  await themeModeNotifier.load();
+
+  final themeModeState = container.read(themeModeNotifierProvider);
+
+  runApp(
+    UncontrolledProviderScope(
+      container: container,
+      child: Consumer(
+        builder: (context, ref, child) {
+          // Here we know is loaded
+          final themeModeState =
+              ref.watch(themeModeNotifierProvider) as ThemeModeStateLoaded;
+
+          return MaterialApp(
+            themeMode: themeModeState.themeMode,
+            theme: ThemeData.light(),
+            darkTheme: ThemeData.dark(),
+            home: const Scaffold(),
+          );
+        },
+      ),
+    ),
+  );
+}
+
+@Riverpod(keepAlive: true)
+class ThemeModeNotifier extends _$ThemeModeNotifier {
+  @override
+  ThemeModeState build() {
+    return const ThemeModeState.initial();
+  }
+
+  Future<void> load() async {
+    state = const ThemeModeState.loading();
+
+    // load from shared preferences
+    state = const ThemeModeState.loaded(ThemeMode.dark);
+  }
+}
+
+@freezed
+class ThemeModeState with _$ThemeModeState {
+  const factory ThemeModeState.initial() = ThemeModeStateInitial;
+  const factory ThemeModeState.loading() = ThemeModeStateLoading;
+  const factory ThemeModeState.loaded(ThemeMode themeMode) =
+      ThemeModeStateLoaded;
+}
+```
+
+'''
+
 ---
 
 Business logic would sit in the nearest ancestor folder shared will all views that use it.
