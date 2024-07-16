@@ -1,5 +1,23 @@
 # Riverpod-Tips-Tricks.
 
+#### listening Provider before run app
+```dart
+I added a listener
+final container = ProviderContainer();       windowManager.addListener(AppWindowListener(container));
+
+and here's my listener
+class AppWindowListener extends WindowListener {
+  final ProviderContainer container;
+  AppWindowListener(this.container);
+  @override
+  void onWindowClose() async {
+    container.invalidate(playerNotifierProvider);
+    await windowManager.destroy();
+  }
+}
+
+```
+
 #### Autodispose on dispose listner
 
 ```dart onDispose abstract method
