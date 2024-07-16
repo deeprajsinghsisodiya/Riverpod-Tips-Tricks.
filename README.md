@@ -1,5 +1,20 @@
 # Riverpod-Tips-Tricks.
 
+#### Autodispose on dispose listner
+
+```dart onDispose abstract method
+void onDispose( void cb() )
+Adds a listener to perform an operation right before the provider is destroyed.
+
+This typically happen when a provider marked with .autoDispose is no-longer used, or when ProviderContainer.dispose is called.
+
+See also:
+
+Provider.autoDispose, a modifier which tell a provider that it should destroy its state when no-longer listened.
+ProviderContainer.dispose, to destroy all providers associated with a ProviderContainer at once.
+Implementation
+void onDispose(void Function() cb);
+```
 
 
 ```dart
