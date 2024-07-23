@@ -1,5 +1,19 @@
 # Riverpod-Tips-Tricks.
 
+
+---
+####  set value of a provider in initstate this future is must otherwise it will show error
+
+```dart
+  void initState() {
+    super.initState();
+    Future(() { //todo set value of a provider in initstate this futureis must other wise it will show error
+      ref.read(tokenProvider.notifier).values(widget.token!);
+    });
+  }
+
+---
+
 #### listening Provider before run app
 ```dart
 I added a listener
