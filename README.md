@@ -1,5 +1,17 @@
 # Riverpod-Tips-Tricks.
+#### Simulating a Stream, polling
 
+```dart
+@riverpod
+Future<int> count(CountRef ref) async {
+  final count = await ref.watch(whatever).getCount();
+  ref.invalidateAfter(Duration(seconds: 10));
+  // or
+  ref.cacheFor(Duration(seconds: 10));
+  // or whatever other logic that runs ref.invalidateSelf()
+  return count;
+}
+```
 
 ---
 ####  set value of a provider in initstate this future is must otherwise it will show error
