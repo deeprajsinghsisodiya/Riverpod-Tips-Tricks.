@@ -1,4 +1,39 @@
 # Riverpod-Tips-Tricks.
+
+---
+#### Update when value change SP
+```dart
+class SinceNotifier extends Notifier<DateTime> {
+  static const sinceKey = 'since';
+
+  @override
+  DateTime build() {
+    log('build notifier');
+
+    // when updated, the value is saved to shared preferences
+    ref.listenSelf((DateTime? previous, DateTime value) {
+      log('listenSelf');
+      prefs.setInt(sinceKey, value.millisecondsSinceEpoch);
+    });
+
+    // get the value from shared preferences
+    final data = prefs.getInt(sinceKey);
+    if (data == null) {
+      return DateTime.utc(2022, 6, 9, 12 + 7); // noon at UTC-7
+    }
+    return DateTime.fromMillisecondsSinceEpoch(data);
+  }
+
+  void update(DateTime Function(DateTime oldValue) cb) {
+    state = cb(state);
+  }
+}
+
+final sinceProvider =
+    NotifierProvider<SinceNotifier, DateTime>(SinceNotifier.new);
+```
+---
+
 #### Simulating a Stream, polling
 
 ```dart
