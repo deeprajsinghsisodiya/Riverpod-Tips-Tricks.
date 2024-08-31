@@ -1,6 +1,32 @@
 # Riverpod-Tips-Tricks.
 
 ---
+
+####  how to get the system's locale as a provider:
+
+```dart
+
+
+@Riverpod(keepAlive: true)
+Locale _systemLocale(_SystemLocaleRef ref) {
+    WidgetsBinding.instance.platformDispatcher.onLocaleChanged = ref.invalidateSelf;
+    return WidgetsBinding.instance.platformDispatcher.locale;
+}
+In order for this to work, you must have this before runApp in your main: WidgetsFlutterBinding.ensureInitialized() 
+
+Or you can use runApp twice.
+My first line of main is usually:
+main () async {
+   runApp(SizedBox.expand(child: CircularProgressIndicator.adaptive());
+   // rest of async stuff
+   runApp(TheRealApp());
+ }
+
+and then you don't need to remember about WidgetsBinding, because it's already done
+I put the spinner there so I know how long I'm holding up in main before getting to my real widgets.
+```
+
+---
 #### Update when value change SP
 ```dart
 class SinceNotifier extends Notifier<DateTime> {
