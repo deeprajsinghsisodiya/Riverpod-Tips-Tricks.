@@ -2,6 +2,41 @@
 
 ---
 
+####I create a ref.listen in build that feeds a ValueListenable, and then I can listen on that.
+I did one as an extension on ref once, so you could say ref.asListenable(someProvider)
+
+```dart
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+extension RefAsListenable on Ref {
+  ValueListenable<T> asListenable<T>(
+    AlwaysAliveProviderBase<T> provider,
+  ) {
+    final valueNotifier = ValueNotifier(read(provider));
+
+    final removeListener = listen<T>(provider, (_, next) {
+      valueNotifier.value = next;
+    });
+
+    onDispose(() {
+      removeListener();
+      valueNotifier.dispose();
+    });
+
+    return valueNotifier;
+  }
+}
+
+
+ValueListenable myListen = ref.asListenable(someProvider);
+
+```
+
+---
+
+
 ####  how to get the system's locale as a provider:
 
 ```dart
