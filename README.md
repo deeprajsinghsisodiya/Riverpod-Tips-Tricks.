@@ -1,5 +1,16 @@
 # Riverpod-Tips-Tricks.
 
+
+---
+#### Related to asynloding indicatior
+Progress is unrelated to retry
+You can just set it with state = AsyncLoading(progress: .1)
+It's for enabling a ProgressIndicator where the spinner isn't random.
+
+For example you could sync it with the amount of bytes downloaded VS total bytes requested.
+
+It's not automatical though
+
 ---
 
 #### I create a ref.listen in build that feeds a ValueListenable, and then I can listen on that.
