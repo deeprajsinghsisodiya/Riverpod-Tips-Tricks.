@@ -2,6 +2,35 @@
 
 
 ---
+#### And for tracking success and errors in side ref.listen? prev, next state .isSuccess, isError
+
+```dart
+if (prev?.isLoading ?? false)
+if (prev?.isReloading ?? false)
+if (prev?.isRefreshing ?? false)
+
+if (next.isLoading)
+if (next.isReloading)
+if (next.isRefreshing)
+
+
+switch (value) {
+  case AsyncError() => error
+  case AsyncData() => value
+  case _ => loading
+}
+You can also do
+if (value.isLoading) {
+ 
+} else if (value.hasError) {
+
+} else {
+  // has data
+}
+```
+
+
+---
 #### Related to asynloding indicatior
 Progress is unrelated to retry
 You can just set it with state = AsyncLoading(progress: .1)
