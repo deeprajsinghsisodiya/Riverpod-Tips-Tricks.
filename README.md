@@ -1,5 +1,16 @@
 # Riverpod-Tips-Tricks.
 
+---
+#### Change state usind update method similar to this state = AsyncValue.data([...result, ...state.requireValue]);
+
+```dart
+update((prev) => [...prev, newValue]);
+that does the AsyncData wrapping and unwrapping
+defined on AsyncNotifier
+https://pub.dev/documentation/riverpod/latest/riverpod/AsyncNotifier/update.html
+
+```
+
 
 ---
 #### And for tracking success and errors in side ref.listen? prev, next state .isSuccess, isError
